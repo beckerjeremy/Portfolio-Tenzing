@@ -6,8 +6,6 @@
 
 <script>
 import * as THREE from 'three';
-import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
-import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader';
 
 export default {
     data: function () {
@@ -28,8 +26,10 @@ export default {
             this.scene = new THREE.Scene();
             this.scene.background = new THREE.Color( 0x222222 );
             this.camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 100000 );
-            this.objectLoader = new OBJLoader();
-            this.materialLoader = new MTLLoader();
+            this.objectLoader = new (require('three/examples/jsm/loaders/OBJLoader')).OBJLoader(); // new OBJLoader();
+            this.materialLoader = new (require('three/examples/jsm/loaders/MTLLoader')).MTLLoader(); // new MTLLoader();
+
+            console.log(this.objectLoader)
 
             this.renderer = new THREE.WebGLRenderer();
             this.renderer.setSize( window.innerWidth, window.innerHeight );
