@@ -26,8 +26,8 @@ export default {
             this.scene = new THREE.Scene();
             this.scene.background = new THREE.Color( 0x222222 );
             this.camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 100000 );
-            this.objectLoader = new (require('three/examples/jsm/loaders/OBJLoader')).OBJLoader(); // new OBJLoader();
-            this.materialLoader = new (require('three/examples/jsm/loaders/MTLLoader')).MTLLoader(); // new MTLLoader();
+            this.objectLoader = new (require('three/examples/jsm/loaders/OBJLoader')).OBJLoader();
+            this.materialLoader = new (require('three/examples/jsm/loaders/MTLLoader')).MTLLoader();
 
             console.log(this.objectLoader)
 
