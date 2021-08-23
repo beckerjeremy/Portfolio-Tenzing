@@ -24,7 +24,7 @@ export default {
         setup: function () {
 
             this.scene = new THREE.Scene();
-            this.scene.background = new THREE.Color( 0x222222 );
+            this.scene.background = new THREE.Color( 0x111111 );
             this.camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 100000 );
             this.objectLoader = new (require('three/examples/jsm/loaders/OBJLoader')).OBJLoader();
             this.materialLoader = new (require('three/examples/jsm/loaders/MTLLoader')).MTLLoader();
@@ -41,15 +41,6 @@ export default {
 
             this.lights.ambientLight = new THREE.AmbientLight( 0xffffff, .2 );
             this.scene.add( this.lights.ambientLight );
-
-            this.lights.light  = new THREE.PointLight( 0xffffff, 1, 60 );
-            this.lights.light.position.set( 0, 15, 10 );
-            this.lights.light.castShadow = true;
-            this.lights.light.shadow.mapSize.width = 1024;
-            this.lights.light.shadow.mapSize.height = 1024;
-            this.lights.light.shadow.camera.near = 0.5;
-            this.lights.light.shadow.camera.far = 1000;
-            this.scene.add( this.lights.light );
 
             this.objects.container = new THREE.Group();
             this.scene.add( this.objects.container );
@@ -81,6 +72,7 @@ export default {
                             this.scene.add( object );
 
                             this.objects.text = object;
+                            this.addLights();
                         }.bind(this), this.onProgress, this.onError
                     );
 
@@ -89,12 +81,22 @@ export default {
 
             this.camera.position.z = 15;
 
-            /*window.onwheel = function (event) {
-                if (text) text.rotateY(event.deltaY * 0.001);
-            }*/
-
             // Renders
             this.animate();
+        },
+
+        addLights: function () {
+            this.lights.directionalRed = new THREE.DirectionalLight( 0xff00ff, 1, 100 );
+            this.lights.directionalRed.position.set(-10, 15, 0);
+            this.lights.directionalRed.castShadow = true;
+            this.lights.directionalRed.target = this.objects.text;
+            this.scene.add( this.lights.directionalRed );
+
+            this.lights.directionalBlue = new THREE.DirectionalLight( 0x0000ff, 1, 100 );
+            this.lights.directionalBlue.position.set(10, 15, 0);
+            this.lights.directionalBlue.castShadow = true;
+            this.lights.directionalBlue.target = this.objects.text;
+            this.scene.add( this.lights.directionalBlue );
         },
 
         animate: function () {

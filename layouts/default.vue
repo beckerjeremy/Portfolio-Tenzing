@@ -1,11 +1,11 @@
 <template>
     <div class="wrapper">
         <div class="fixed top-10 right-10 flex flex-col" @mouseleave="dropdownOpen = false">
-            <span class="text-5xl font-bold text-pink-600 self-end logo"  @mouseenter="dropdownOpen = true"><NuxtLink to="/">TB</NuxtLink></span>
+            <span class="text-5xl font-bold text-pink font-title self-end logo"  @mouseenter="dropdownOpen = true"><NuxtLink to="/">TB</NuxtLink></span>
             <div class="flex flex-col" v-if="dropdownOpen">
-                <NuxtLink class="flex-initial text-5xl text-indigo-600 self-end" to="/studio">Studio</NuxtLink>
-                <NuxtLink class="flex-initial text-5xl text-indigo-600 self-end" to="/portfolio">Portfolio</NuxtLink>
-                <NuxtLink class="flex-initial text-5xl text-indigo-600 self-end" to="/about">About</NuxtLink>
+                <NuxtLink class="flex-initial text-5xl text-blue font-title self-end" to="/studio">Studio</NuxtLink>
+                <NuxtLink class="flex-initial text-5xl text-blue font-title self-end" to="/portfolio">Portfolio</NuxtLink>
+                <NuxtLink class="flex-initial text-5xl text-blue font-title self-end" to="/about">About</NuxtLink>
             </div>
         </div>
         <Nuxt />
