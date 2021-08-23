@@ -1,7 +1,13 @@
 <template>
-  <Tutorial/>
+  <div>
+    <TitleText />
+  </div>
 </template>
 
 <script>
-export default {}
+import TitleText from '../components/TitleText.vue'
+export default {
+  components: { TitleText },
+  
+}
 </script>
