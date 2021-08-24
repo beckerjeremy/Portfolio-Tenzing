@@ -1,5 +1,5 @@
 <template>
-    <div class="grid h-screen grid-rows-portfolio" ref="wrapper">
+    <div class="grid h-screen grid-rows-portfolio sticky" ref="wrapper">
         <span class="project-title text-blue text-5xl leading-portfolio">{{ title }}</span>
         <div class="h-full image-wrapper bg-no-repeat" :style="'background-image:url(' + src + ')'" ref="background"></div>
     </div>
@@ -11,7 +11,7 @@ export default {
 
     data: function () {
         return {
-            backgroundWidth: 2100,
+            backgroundWidth: 2500,
             backgroundPosition: 0,
             startOffset: 0,
             scrollThreshhold: 300,
@@ -34,13 +34,25 @@ export default {
         onScroll: function (e) {
             let element = this.$refs.wrapper;
 
-            this.scrollThreshhold = Math.abs(e.wheelDelta) + 10;
+            this.scrollThreshhold = (Math.abs(e.wheelDelta) + 100);
 
-            if (Math.abs(element.getBoundingClientRect().y) <= this.scrollThreshhold) {
-                console.log(this.scrollThreshhold, Math.abs(element.getBoundingClientRect().y))
-                if (e.wheelDelta > 0 && this.backgroundPosition < this.startOffset || e.wheelDelta < 0 && this.backgroundPosition > this.startOffset - this.backgroundWidth) {
+            // Scroll up
+            if (e.wheelDelta > 0 && element.getBoundingClientRect().y >= - e.wheelDelta && element.getBoundingClientRect().y < 0) {
+                e.preventDefault();
+                window.scrollBy(0, element.getBoundingClientRect().y);
+            }
+
+            // Scroll down
+            if (e.wheelDelta < 0 && element.getBoundingClientRect().y <= - e.wheelDelta && element.getBoundingClientRect().y > 0) {
+                e.preventDefault();
+                window.scrollBy(0, element.getBoundingClientRect().y);
+            }
+
+            console.log(this.title, element.getBoundingClientRect().y)
+
+            if (element.getBoundingClientRect().y == 0) {
+                if (e.wheelDelta > 0 && this.backgroundPosition < this.startOffset || e.wheelDelta < 0 && this.backgroundPosition > this.startOffset - this.backgroundWidth || e.wheelDelta == 0) {
                     e.preventDefault();
-                    window.scrollBy(0, element.getBoundingClientRect().y);
                     this.setImageOffset(this.clamp(this.backgroundPosition += e.wheelDelta, this.startOffset - this.backgroundWidth, this.startOffset));
                 }
             }
