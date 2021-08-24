@@ -14,7 +14,7 @@ export default {
             backgroundWidth: 2100,
             backgroundPosition: 0,
             startOffset: 0,
-            scrollThrashhold: 300,
+            scrollThreshhold: 300,
         }
     },
     
@@ -22,30 +22,31 @@ export default {
         this.startOffset = window.innerWidth / 2;
         this.setImageOffset( this.startOffset );
         this.setImageWidth( this.src ).then(() =>{
-            window.addEventListener('wheel', this.onScroll, { passive: false });
+            window.addEventListener('mousewheel', this.onScroll, { passive: false });
         });
     },
 
     beforeDestroy () {
-        window.removeEventListener('wheel', this.onScroll);
+        window.removeEventListener('mousewheel', this.onScroll);
     },
 
     methods: {
         onScroll: function (e) {
             let element = this.$refs.wrapper;
 
-            this.scrollThrashhold = Math.abs(e.wheelDelta) * 3;
+            this.scrollThreshhold = Math.abs(e.wheelDelta) + 10;
 
-            console.log(this.scrollThrashhold, Math.abs(element.getBoundingClientRect().y))
-
-            if (Math.abs(element.getBoundingClientRect().y) < this.scrollThrashhold) {
-                if (e.wheelDelta > 0 && this.backgroundPosition < this.startOffset || e.wheelDelta < 0 && this.backgroundPosition >= this.startOffset - this.backgroundWidth) {
+            if (Math.abs(element.getBoundingClientRect().y) <= this.scrollThreshhold) {
+                console.log(this.scrollThreshhold, Math.abs(element.getBoundingClientRect().y))
+                if (e.wheelDelta > 0 && this.backgroundPosition < this.startOffset || e.wheelDelta < 0 && this.backgroundPosition > this.startOffset - this.backgroundWidth) {
                     e.preventDefault();
                     window.scrollBy(0, element.getBoundingClientRect().y);
-                    this.setImageOffset(this.backgroundPosition += e.wheelDelta);
+                    this.setImageOffset(this.clamp(this.backgroundPosition += e.wheelDelta, this.startOffset - this.backgroundWidth, this.startOffset));
                 }
             }
         },
+
+        clamp: function (num, min, max) { return Math.min(Math.max(num, min), max) },
 
         setImageWidth: async function (src) {
             let image = new Image();
