@@ -9,5 +9,13 @@ module.exports = {
         title: ['Lao', 'sans-serif'],
         text: ['Khmer', 'sans-serif'],
       },
+      extend: {
+        gridTemplateRows: {
+          'portfolio': '200px 1fr',
+        },
+        lineHeight: {
+          'portfolio': '200px',
+        }
+      }
     },
   }
