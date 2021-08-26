@@ -4,6 +4,7 @@ module.exports = {
         blue: '#1089BC',
         green: '#00BC24',
         pink: '#B500BC',
+        lightPink: '#FDD6FF',
       },
       fontFamily: {
         title: ['Lao', 'sans-serif'],
@@ -12,6 +13,9 @@ module.exports = {
       extend: {
         gridTemplateRows: {
           'portfolio': '200px 1fr',
+        },
+        gridTemplateColumns: {
+          'studio': '2fr 1fr',
         },
         lineHeight: {
           'portfolio': '200px',

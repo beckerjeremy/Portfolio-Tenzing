@@ -47,8 +47,8 @@ export default {
                 e.preventDefault();
                 window.scrollBy(0, element.getBoundingClientRect().y);
             }
-
-            console.log(this.title, element.getBoundingClientRect().y)
+            
+            if (Math.abs(element.getBoundingClientRect().y) < 50) window.scrollBy(0, element.getBoundingClientRect().y);
 
             if (element.getBoundingClientRect().y == 0) {
                 if (e.wheelDelta > 0 && this.backgroundPosition < this.startOffset || e.wheelDelta < 0 && this.backgroundPosition > this.startOffset - this.backgroundWidth || e.wheelDelta == 0) {
