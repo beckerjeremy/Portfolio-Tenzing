@@ -1,6 +1,6 @@
 <template>
     <div class="grid h-screen grid-rows-portfolio sticky" ref="wrapper">
-        <p class="project-title text-blue text-5xl leading-portfolio px-30">{{ title }}</p>
+        <p class="project-title text-blue text-5xl leading-portfolio pl-20 inline-block">{{ title }}</p>
         <div class="h-full image-wrapper bg-no-repeat" :style="'background-image:url(' + src + ')'" ref="background"></div>
     </div>
 </template>
@@ -34,26 +34,19 @@ export default {
         onScroll: function (e) {
             let element = this.$refs.wrapper;
 
-            this.scrollThreshhold = e.wheelDelta * 1;
+            this.scrollThreshhold = this.clamp(e.wheelDelta * 2, 300, 10000);
 
-            /// Scroll up
-            if ( this.scrollThreshhold > 0 && element.getBoundingClientRect().y >= -  this.scrollThreshhold && element.getBoundingClientRect().y < 0) {
-                e.preventDefault();
+            if (this.hasContent(e.wheelDelta) && Math.abs(element.getBoundingClientRect().y) < this.scrollThreshhold) {
                 window.scrollBy(0, element.getBoundingClientRect().y);
-            }
-
-            // Scroll down
-            if ( this.scrollThreshhold < 0 && element.getBoundingClientRect().y <= -  this.scrollThreshhold && element.getBoundingClientRect().y > 0) {
                 e.preventDefault();
-                window.scrollBy(0, element.getBoundingClientRect().y);
+                this.setImageOffset(this.clamp(this.backgroundPosition += e.wheelDelta, this.startOffset - this.backgroundWidth, this.startOffset));
             }
+        },
 
-            if (element.getBoundingClientRect().y == 0) {
-                if (e.wheelDelta > 0 && this.backgroundPosition < this.startOffset || e.wheelDelta < 0 && this.backgroundPosition > this.startOffset - this.backgroundWidth || e.wheelDelta == 0) {
-                    e.preventDefault();
-                    this.setImageOffset(this.clamp(this.backgroundPosition += e.wheelDelta, this.startOffset - this.backgroundWidth, this.startOffset));
-                }
-            }
+        hasContent(delta) {
+            if (delta > 0 && this.backgroundPosition < this.startOffset) return true;
+            if (delta < 0 && this.backgroundPosition > this.startOffset - this.backgroundWidth) return true;
+            return false;
         },
 
         clamp: function (num, min, max) { return Math.min(Math.max(num, min), max) },
