@@ -34,21 +34,19 @@ export default {
         onScroll: function (e) {
             let element = this.$refs.wrapper;
 
-            this.scrollThreshhold = (Math.abs(e.wheelDelta) + 100);
+            this.scrollThreshhold = e.wheelDelta * 1;
 
-            // Scroll up
-            if (e.wheelDelta > 0 && element.getBoundingClientRect().y >= - e.wheelDelta && element.getBoundingClientRect().y < 0) {
+            /// Scroll up
+            if ( this.scrollThreshhold > 0 && element.getBoundingClientRect().y >= -  this.scrollThreshhold && element.getBoundingClientRect().y < 0) {
                 e.preventDefault();
                 window.scrollBy(0, element.getBoundingClientRect().y);
             }
 
             // Scroll down
-            if (e.wheelDelta < 0 && element.getBoundingClientRect().y <= - e.wheelDelta && element.getBoundingClientRect().y > 0) {
+            if ( this.scrollThreshhold < 0 && element.getBoundingClientRect().y <= -  this.scrollThreshhold && element.getBoundingClientRect().y > 0) {
                 e.preventDefault();
                 window.scrollBy(0, element.getBoundingClientRect().y);
             }
-            
-            if (Math.abs(element.getBoundingClientRect().y) < 50) window.scrollBy(0, element.getBoundingClientRect().y);
 
             if (element.getBoundingClientRect().y == 0) {
                 if (e.wheelDelta > 0 && this.backgroundPosition < this.startOffset || e.wheelDelta < 0 && this.backgroundPosition > this.startOffset - this.backgroundWidth || e.wheelDelta == 0) {
