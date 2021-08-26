@@ -52,13 +52,16 @@ export default {
         clamp: function (num, min, max) { return Math.min(Math.max(num, min), max) },
 
         setImageWidth: async function (src) {
-            let image = new Image();
+            let imageWrapper = this.$refs.background;
 
-            image.onload = function () {
-                this.backgroundWidth = image.width;
+            const img = new Image();
+            img.onload = function () {
+                let scale = imageWrapper.clientHeight / img.height;
+
+                this.backgroundWidth = img.width * scale;
+                console.log(this.backgroundWidth)
             };
-
-            image.scr = src;
+            img.setAttribute('src', src);
         },
 
         setImageOffset: function (offset) {
