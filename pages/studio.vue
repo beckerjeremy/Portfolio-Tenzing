@@ -1,6 +1,6 @@
 <template>
     <div class="mx-auto px-10">
-        <h2 class="text-9xl text-blue font-title tracking-widest py-32">Studio</h2>
+        <h2 class="text-9xl text-blue font-title tracking-widest py-32 tracking-title font-light">Studio</h2>
 
         <div class="grid grid-cols-studio gap-x-4 gap-y-96 p-20">
             <img src="/studio/image1.png">

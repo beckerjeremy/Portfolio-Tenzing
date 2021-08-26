@@ -10,6 +10,9 @@ module.exports = {
         title: ['Lao', 'sans-serif'],
         text: ['Khmer', 'sans-serif'],
       },
+      letterSpacing: {
+        'title': '.3em',
+      },
       extend: {
         gridTemplateRows: {
           'portfolio': '200px 1fr',

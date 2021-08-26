@@ -1,6 +1,6 @@
 <template>
     <div class="grid h-screen grid-rows-portfolio sticky" ref="wrapper">
-        <p class="project-title text-blue text-5xl leading-portfolio pl-20 inline-block">{{ title }}</p>
+        <p class="project-title text-blue text-5xl leading-portfolio pl-20 inline-block tracking-title">{{ title }}</p>
         <div class="h-full image-wrapper bg-no-repeat" :style="'background-image:url(' + src + ')'" ref="background"></div>
     </div>
 </template>
