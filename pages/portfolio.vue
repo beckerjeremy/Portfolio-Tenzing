@@ -1,6 +1,6 @@
 <template>
     <div>
-        <span class="text-7xl text-pink font-title tracking-widest">Portfolio</span>
+        <h2 class="text-7xl text-pink font-title tracking-widest py-32 px-10">Portfolio</h2>
 
         <portfolio-slider src="/slide1.jpg" title="Project 1" />
         <portfolio-slider src="/slide1.jpg" title="Project 2" />

@@ -1,6 +1,6 @@
 <template>
     <div class="grid h-screen grid-rows-portfolio sticky" ref="wrapper">
-        <span class="project-title text-blue text-5xl leading-portfolio">{{ title }}</span>
+        <p class="project-title text-blue text-5xl leading-portfolio px-30">{{ title }}</p>
         <div class="h-full image-wrapper bg-no-repeat" :style="'background-image:url(' + src + ')'" ref="background"></div>
     </div>
 </template>

@@ -15,7 +15,8 @@ module.exports = {
           'portfolio': '200px 1fr',
         },
         gridTemplateColumns: {
-          'studio': '2fr 1fr',
+          'studio': '1fr 1fr',
+          'about': '300px 1fr',
         },
         lineHeight: {
           'portfolio': '200px',
